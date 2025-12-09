@@ -2,6 +2,20 @@
 
 A highly automated personal events discovery system that finds interesting NYC events through newsletter subscriptions, powered by Supabase, Make.com, and email automation.
 
+## 🚀 Getting Started
+
+**New to this project? Start here:**
+
+👉 **[START_HERE.md](START_HERE.md)** - Your complete setup guide
+
+Follow these guides in order:
+1. **[QUICK_START.md](docs/QUICK_START.md)** (30 min) - Setup Supabase, deploy functions
+2. **[MAKE_SETUP_SIMPLE.md](docs/MAKE_SETUP_SIMPLE.md)** (30 min) - Configure Make.com automation
+
+**Want more details?** See [setup-guide.md](docs/setup-guide.md) for the comprehensive version.
+
+---
+
 ## Overview
 
 This system helps you discover cool NYC events by:

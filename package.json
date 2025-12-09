@@ -1,0 +1,29 @@
+{
+  "name": "nyc-events-finder",
+  "version": "1.0.0",
+  "description": "Automated NYC events discovery system powered by newsletters",
+  "scripts": {
+    "db:migrate": "supabase db push",
+    "db:reset": "supabase db reset",
+    "functions:deploy": "npm run functions:deploy:all",
+    "functions:deploy:all": "supabase functions deploy like-event && supabase functions deploy analyze-source && supabase functions deploy ingest-email",
+    "functions:deploy:like-event": "supabase functions deploy like-event",
+    "functions:deploy:analyze-source": "supabase functions deploy analyze-source",
+    "functions:deploy:ingest-email": "supabase functions deploy ingest-email",
+    "link": "supabase link",
+    "setup": "npm run link && npm run db:migrate && npm run functions:deploy:all"
+  },
+  "keywords": [
+    "nyc",
+    "events",
+    "newsletters",
+    "supabase",
+    "make.com",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "supabase": "^1.0.0"
+  }
+}

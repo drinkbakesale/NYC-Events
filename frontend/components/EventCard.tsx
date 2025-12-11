@@ -13,6 +13,15 @@ interface EventCardProps {
 export default function EventCard({ event, reaction, onLike, onDislike }: EventCardProps) {
   const [expanded, setExpanded] = useState(false)
 
+  const formatTime = (dateString: string | null) => {
+    if (!dateString) return ''
+    return new Date(dateString).toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    })
+  }
+
   const handleCardClick = (e: React.MouseEvent) => {
     // Don't toggle if clicking on action buttons
     if ((e.target as HTMLElement).closest('.event-actions')) {
@@ -26,6 +35,13 @@ export default function EventCard({ event, reaction, onLike, onDislike }: EventC
       <div className="event-header">
         <div className="event-info">
           <div className="event-title">{event.title}</div>
+          <div className="event-meta">
+            {event.start_time && <span>{formatTime(event.start_time)}</span>}
+            {event.neighborhood && <span>{event.neighborhood}</span>}
+          </div>
+          {event.description && (
+            <div className="event-summary">{event.description}</div>
+          )}
         </div>
 
         <div className="event-actions">
@@ -56,9 +72,10 @@ export default function EventCard({ event, reaction, onLike, onDislike }: EventC
 
       {expanded && (
         <div className="event-details">
-          {event.description && (
+          {event.venue_name && (
             <div className="event-details-row">
-              <div>{event.description}</div>
+              <div className="event-details-label">Venue</div>
+              <div>{event.venue_name}</div>
             </div>
           )}
 

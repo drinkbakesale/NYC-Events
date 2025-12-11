@@ -234,23 +234,24 @@ a {
 .event-title {
   font-size: 17px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   line-height: 1.4;
-}
-
-.event-summary {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
-  line-height: 1.5;
 }
 
 .event-meta {
   font-size: 13px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   color: #999;
+  margin-bottom: 8px;
+}
+
+.event-summary {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-top: 6px;
 }
 
 .event-actions {

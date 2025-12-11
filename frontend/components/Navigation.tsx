@@ -7,23 +7,25 @@ export default function Navigation() {
   const router = useRouter()
 
   const navItems = [
-    { path: '/', label: 'Events', icon: '📅' },
-    { path: '/liked-events', label: 'Liked', icon: '👍' },
-    { path: '/suggested-sources', label: 'Sources', icon: '📰' },
-    { path: '/unsubscribe', label: 'Unsub', icon: '🚫' },
+    { path: '/', label: 'Upcoming Events' },
+    { path: '/liked-events', label: 'Liked Events' },
+    { path: '/suggested-sources', label: 'New Sources to Subscribe' },
+    { path: '/unsubscribe', label: 'Sources to Unsub' },
   ]
 
   return (
     <nav className="nav">
-      {navItems.map((item) => (
-        <button
-          key={item.path}
-          className={`nav-item ${pathname === item.path ? 'active' : ''}`}
-          onClick={() => router.push(item.path)}
-        >
-          <span className="nav-icon">{item.icon}</span>
-          <span>{item.label}</span>
-        </button>
+      {navItems.map((item, index) => (
+        <>
+          <button
+            key={item.path}
+            className={`nav-item ${pathname === item.path ? 'active' : ''}`}
+            onClick={() => router.push(item.path)}
+          >
+            <span>{item.label}</span>
+          </button>
+          {index < navItems.length - 1 && <div key={`divider-${index}`} className="nav-divider" />}
+        </>
       ))}
     </nav>
   )

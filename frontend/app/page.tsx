@@ -132,7 +132,7 @@ export default function HomePage() {
       <div>
         <div className="header">
           <h1>NYC Events</h1>
-          <p>Find events from your favorite newsletters</p>
+          <p>Where to go and what to do</p>
         </div>
         <div className="loading">Loading events...</div>
       </div>
@@ -143,7 +143,7 @@ export default function HomePage() {
     <div>
       <div className="header">
         <h1>NYC Events</h1>
-        <p>Find events from your favorite newsletters</p>
+        <p>Where to go and what to do</p>
       </div>
 
       <DateRangeSelector

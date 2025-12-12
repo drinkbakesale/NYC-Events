@@ -19,9 +19,16 @@ export default function HomePage() {
     return { start, end }
   })
 
+  // Fetch on mount and when date range changes
   useEffect(() => {
     fetchEvents()
   }, [dateRange])
+
+  // Also ensure we fetch fresh data on every mount (when navigating back to page)
+  useEffect(() => {
+    fetchEvents()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const fetchEvents = async () => {
     setLoading(true)

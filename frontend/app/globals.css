@@ -194,7 +194,13 @@ a {
   transition: all 0.2s;
 }
 
-.custom-range button:active {
+.custom-range button:disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.custom-range button:active:not(:disabled) {
   transform: scale(0.98);
 }
 

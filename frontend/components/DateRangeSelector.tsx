@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 interface DateRangeSelectorProps {
   dateRange: { start: Date; end: Date }
@@ -13,21 +13,6 @@ export default function DateRangeSelector({ dateRange, onChange }: DateRangeSele
   const [activePreset, setActivePreset] = useState<PresetRange>('next-7')
   const [customStart, setCustomStart] = useState('')
   const [customEnd, setCustomEnd] = useState('')
-
-  // Auto-apply custom range when both dates are selected
-  useEffect(() => {
-    if (customStart && customEnd) {
-      const start = new Date(customStart)
-      start.setHours(0, 0, 0, 0)
-      const end = new Date(customEnd)
-      end.setHours(23, 59, 59, 999)
-
-      if (start <= end) {
-        setActivePreset('custom')
-        onChange({ start, end })
-      }
-    }
-  }, [customStart, customEnd])
 
   const handlePreset = (preset: PresetRange) => {
     // Clear custom dates when clicking preset buttons
@@ -58,6 +43,20 @@ export default function DateRangeSelector({ dateRange, onChange }: DateRangeSele
 
     end.setHours(23, 59, 59, 999)
     onChange({ start, end })
+  }
+
+  const handleApplyCustomRange = () => {
+    if (customStart && customEnd) {
+      const start = new Date(customStart)
+      start.setHours(0, 0, 0, 0)
+      const end = new Date(customEnd)
+      end.setHours(23, 59, 59, 999)
+
+      if (start <= end) {
+        setActivePreset('custom')
+        onChange({ start, end })
+      }
+    }
   }
 
   return (
@@ -97,6 +96,9 @@ export default function DateRangeSelector({ dateRange, onChange }: DateRangeSele
           onChange={(e) => setCustomEnd(e.target.value)}
           placeholder="End date"
         />
+        <button onClick={handleApplyCustomRange} disabled={!customStart || !customEnd}>
+          Apply
+        </button>
       </div>
     </div>
   )

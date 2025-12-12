@@ -50,10 +50,6 @@ export default function UnsubscribePage() {
   if (loading) {
     return (
       <div>
-        <div className="header">
-          <h1>Sources to Unsubscribe</h1>
-          <p>Sources with 5+ dislikes</p>
-        </div>
         <div className="loading">Loading sources...</div>
       </div>
     )
@@ -61,11 +57,6 @@ export default function UnsubscribePage() {
 
   return (
     <div>
-      <div className="header">
-        <h1>Sources to Unsubscribe</h1>
-        <p>Sources with 5+ dislikes - consider unsubscribing</p>
-      </div>
-
       {sources.length === 0 ? (
         <div className="empty-state">
           <div className="empty-state-title">No sources to unsubscribe</div>

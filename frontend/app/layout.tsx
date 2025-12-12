@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Navigation from '@/components/Navigation'
+import Header from '@/components/Header'
 
 export const metadata: Metadata = {
   title: 'NYC Events Finder',
@@ -16,10 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navigation />
+        <Header />
         <main className="container">
           {children}
         </main>
+        <Navigation />
       </body>
     </html>
   )

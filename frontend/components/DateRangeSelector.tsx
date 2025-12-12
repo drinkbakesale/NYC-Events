@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface DateRangeSelectorProps {
   dateRange: { start: Date; end: Date }
@@ -14,8 +14,27 @@ export default function DateRangeSelector({ dateRange, onChange }: DateRangeSele
   const [customStart, setCustomStart] = useState('')
   const [customEnd, setCustomEnd] = useState('')
 
+  // Auto-apply custom range when both dates are selected
+  useEffect(() => {
+    if (customStart && customEnd) {
+      const start = new Date(customStart)
+      start.setHours(0, 0, 0, 0)
+      const end = new Date(customEnd)
+      end.setHours(23, 59, 59, 999)
+
+      if (start <= end) {
+        setActivePreset('custom')
+        onChange({ start, end })
+      }
+    }
+  }, [customStart, customEnd])
+
   const handlePreset = (preset: PresetRange) => {
+    // Clear custom dates when clicking preset buttons
+    setCustomStart('')
+    setCustomEnd('')
     setActivePreset(preset)
+
     const start = new Date()
     start.setHours(0, 0, 0, 0)
     let end = new Date()
@@ -35,31 +54,9 @@ export default function DateRangeSelector({ dateRange, onChange }: DateRangeSele
         end = new Date(start)
         end.setDate(end.getDate() + 6)
         break
-      case 'custom':
-        return // Don't update range yet
     }
 
     end.setHours(23, 59, 59, 999)
-    onChange({ start, end })
-  }
-
-  const handleCustomRange = () => {
-    if (!customStart || !customEnd) {
-      alert('Please select both start and end dates')
-      return
-    }
-
-    const start = new Date(customStart)
-    start.setHours(0, 0, 0, 0)
-    const end = new Date(customEnd)
-    end.setHours(23, 59, 59, 999)
-
-    if (start > end) {
-      alert('Start date must be before end date')
-      return
-    }
-
-    setActivePreset('custom')
     onChange({ start, end })
   }
 
@@ -100,7 +97,6 @@ export default function DateRangeSelector({ dateRange, onChange }: DateRangeSele
           onChange={(e) => setCustomEnd(e.target.value)}
           placeholder="End date"
         />
-        <button onClick={handleCustomRange}>Apply</button>
       </div>
     </div>
   )

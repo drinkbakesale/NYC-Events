@@ -130,10 +130,6 @@ export default function HomePage() {
   if (loading) {
     return (
       <div>
-        <div className="header">
-          <h1>NYC Events</h1>
-          <p>Where to go and what to do</p>
-        </div>
         <div className="loading">Loading events...</div>
       </div>
     )
@@ -141,11 +137,6 @@ export default function HomePage() {
 
   return (
     <div>
-      <div className="header">
-        <h1>NYC Events</h1>
-        <p>Where to go and what to do</p>
-      </div>
-
       <DateRangeSelector
         dateRange={dateRange}
         onChange={setDateRange}

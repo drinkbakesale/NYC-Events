@@ -33,41 +33,44 @@ export default function EventCard({ event, reaction, onLike, onDislike }: EventC
   return (
     <div className="event-card" onClick={handleCardClick}>
       <div className="event-header">
-        <div className="event-info">
-          <div className="event-title">{event.title}</div>
-          <div className="event-meta">
-            {event.start_time && <span>{formatTime(event.start_time)}</span>}
-            {event.neighborhood && <span>{event.neighborhood}</span>}
+        <div className="event-title-row">
+          <div className="event-info">
+            <div className="event-title">{event.title}</div>
+            <div className="event-meta">
+              {event.start_time && <span>{formatTime(event.start_time)}</span>}
+              {event.neighborhood && <span>{event.neighborhood}</span>}
+            </div>
           </div>
-          {event.description && (
-            <div className="event-summary">{event.description}</div>
-          )}
+
+          <div className="event-actions">
+            <button
+              className={`icon-button ${reaction === 'like' ? 'liked' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation()
+                onLike()
+              }}
+              title="Like event"
+            >
+              ♥
+            </button>
+            <button
+              className="icon-button"
+              onClick={(e) => {
+                e.stopPropagation()
+                if (confirm('Are you sure you want to hide this event?')) {
+                  onDislike()
+                }
+              }}
+              title="Dislike event (hide)"
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
-        <div className="event-actions">
-          <button
-            className={`icon-button ${reaction === 'like' ? 'liked' : ''}`}
-            onClick={(e) => {
-              e.stopPropagation()
-              onLike()
-            }}
-            title="Like event"
-          >
-            ♥
-          </button>
-          <button
-            className="icon-button"
-            onClick={(e) => {
-              e.stopPropagation()
-              if (confirm('Are you sure you want to hide this event?')) {
-                onDislike()
-              }
-            }}
-            title="Dislike event (hide)"
-          >
-            ✕
-          </button>
-        </div>
+        {event.description && (
+          <div className="event-summary">{event.description}</div>
+        )}
       </div>
 
       {expanded && (

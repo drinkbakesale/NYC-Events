@@ -65,10 +65,6 @@ export default function LikedEventsPage() {
   if (loading) {
     return (
       <div>
-        <div className="header">
-          <h1>Liked Events</h1>
-          <p>Events you've liked</p>
-        </div>
         <div className="loading">Loading events...</div>
       </div>
     )
@@ -76,11 +72,6 @@ export default function LikedEventsPage() {
 
   return (
     <div>
-      <div className="header">
-        <h1>Liked Events</h1>
-        <p>Events you've liked</p>
-      </div>
-
       <div className="mb-4">
         <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '12px' }}>
           Upcoming Events ({upcomingEvents.length})

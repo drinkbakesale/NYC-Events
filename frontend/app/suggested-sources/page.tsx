@@ -70,10 +70,6 @@ export default function SuggestedSourcesPage() {
   if (loading) {
     return (
       <div>
-        <div className="header">
-          <h1>Suggested Sources</h1>
-          <p>Newsletters you might want to subscribe to</p>
-        </div>
         <div className="loading">Loading sources...</div>
       </div>
     )
@@ -81,11 +77,6 @@ export default function SuggestedSourcesPage() {
 
   return (
     <div>
-      <div className="header">
-        <h1>Suggested Sources</h1>
-        <p>Newsletters you might want to subscribe to</p>
-      </div>
-
       {sources.length === 0 ? (
         <div className="empty-state">
           <div className="empty-state-title">No suggested sources</div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase, USER_ID, Event, UserEventReaction } from '@/lib/supabase'
 import EventCard from '@/components/EventCard'
 import DateRangeSelector from '@/components/DateRangeSelector'
@@ -19,18 +19,7 @@ export default function HomePage() {
     return { start, end }
   })
 
-  // Fetch on mount and when date range changes
-  useEffect(() => {
-    fetchEvents()
-  }, [dateRange])
-
-  // Also ensure we fetch fresh data on every mount (when navigating back to page)
-  useEffect(() => {
-    fetchEvents()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     setLoading(true)
     try {
       // Fetch events in date range, not hidden
@@ -65,7 +54,12 @@ export default function HomePage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [dateRange])
+
+  // Fetch when date range changes or on mount
+  useEffect(() => {
+    fetchEvents()
+  }, [fetchEvents])
 
   const handleLike = async (eventId: string) => {
     try {
